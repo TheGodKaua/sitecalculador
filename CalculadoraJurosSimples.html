@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Juros Simples</title>
+
+  <style>
+    .caixa {
+      max-width: 1000px;
+      margin: auto;
+      padding: 1rem;
+    }
+    
+    input[type="text"] {
+      text-align: center;
+      padding: 7px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      width: 120px;
+    }
+    
+    button {
+      margin-top: 7px;
+      width: 110px;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(153, 242, 248);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    }
+    .fixarRodape {
+      bottom: 0;
+      position: fixed;
+      width: 100%;
+      margin: auto;
+      text-align: center;
+      font-size: x-large;
+    }
+    </style>
+</head>
+<body>
+  <section class="intro gray">
+    <div class="caixa">
+      <h1>Calculadora de Notas</h1>
+      <p>Capital</p>
+      <input type="text" id="capital">
+      <p class="2">Juros (Ex: 1% = 1)</p>
+      <input type="text" id="juros" class="input"> <br>
+      <p class="2">Tempo em Anos</p>
+      <input type="text" id="tempoAno" class="input"> <br>
+      <p class="2">Tempo em Meses</p>
+      <input type="text" id="tempoMes" class="input"> <br>
+      <button onclick="Calc()">Calcular Juros Simples</button>
+      <p id="resultado"></p>
+    </div>
+  </section>
+    <footer class="fixarRodape">
+    <p>&copy;Kauã</p>
+    </footer>
+</body>
+  <script>
+    function Calc() {  // juros simples
+        var capital = parseFloat(document.getElementById("capital").value);
+	    var juros = parseFloat(document.getElementById("juros").value);
+	    var tempoMes = parseFloat(document.getElementById("tempoMes").value);
+        var tempoAno = parseFloat(document.getElementById("tempoAno").value);
+        
+        if(isNaN(tempoAno)) {
+            resultado = capital * (juros / 100) * tempoMes;
+        } else {
+            resultado = capital * (juros / 100) * (tempoAno * 12);
+        } 
+        if(tempoAno && tempoMes){
+            resultado = capital * (juros / 100) * (tempoAno * 12 + tempoMes);
+        }
+
+        var montante = capital + resultado;
+        document.getElementById("resultado").innerHTML = `O resultado é ${resultado.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}<br>Montante: ${montante.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}`
+        }
+  </script>
+</html>
